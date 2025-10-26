@@ -34,9 +34,9 @@ async def ping_once(session, api):
                 else:
                     apis_status[url] = f"🟡 STATUS {resp.status}"
         except:
-            apis_status[url] = "🔴 FAIL"
+            apis_status[url] = "🔴 DOWN"
         await asyncio.sleep(1)
-    apis_status[url] = "🔴 FAIL"
+    apis_status[url] = "🔴 DOWN"
 
 async def ping_loop():
     await asyncio.sleep(3)
@@ -104,7 +104,7 @@ def index():
         <tbody id="apiTable">
         </tbody>
       </table>
-      <footer>© 2025 No1.Hub | Auto Check Every 5 Minutes</footer>
+      <footer>No1.Hub | Api Status</footer>
       <script>
         async function refreshStatus() {
           try {
@@ -156,7 +156,7 @@ def status():
     for api in APIS:
         result.append({
             "name": api["name"],
-            "status": apis_status.get(api["url"], "⌛ Checking...")
+            "status": apis_status.get(api["url"], "Checking...")
         })
     return jsonify(result)
 
